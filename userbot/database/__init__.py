@@ -16,5 +16,4 @@ def database():
             MONGO_URL, username=DB_USERNAME, password=DB_PASSWORD
         )
 
-    db = client[DB_NAME]
-    return db
+    return client[DB_NAME]

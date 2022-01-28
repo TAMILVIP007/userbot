@@ -35,7 +35,7 @@ special_emojis_dict = {
     "bb": {"emoji": "🏀", "help": "The special basketball emoji"},
     "soccer": {"emoji": "⚽️", "help": "The special football emoji"},
 }
-special_emoji_commands = [x for x in special_emojis_dict]
+special_emoji_commands = list(special_emojis_dict)
 
 
 @UserBot.on_message(filters.command(special_emoji_commands, ".") & filters.me)

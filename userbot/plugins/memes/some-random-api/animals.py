@@ -50,7 +50,7 @@ async def animal_image(_, message: Message):
 async def fact(_, message: Message):
     cmd = message.command
 
-    if not (len(cmd) >= 2):
+    if len(cmd) < 2:
         await message.edit("```Not enough params provided```")
         await asyncio.sleep(3)
         await message.delete()
@@ -79,9 +79,10 @@ async def fact(_, message: Message):
 
 
 # Animal image help
-animal_image_help = []
-for x in animals_without_facts:
-    animal_image_help.append([f".{x}", f"Sends a random picture of a {x}"])
+animal_image_help = [
+    [f".{x}", f"Sends a random picture of a {x}"]
+    for x in animals_without_facts
+]
 
 animal_image_help.append(["These commands", "Works without the command prefix also"])
 

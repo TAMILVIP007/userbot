@@ -34,7 +34,7 @@ async def corona_all(_, message: Message):
         ac.add_row(["Tests/Million", f"{r['testsPerOneMillion']:,}"])
         ac.align = "l"
 
-        await message.edit(f"```{str(ac)}```\nLast updated on: {last_updated}")
+        await message.edit(f'```{ac}```\nLast updated on: {last_updated}')
     except Exception as e:
         await message.edit("`The corona API could not be reached`")
         print(e)
@@ -46,7 +46,7 @@ async def corona_all(_, message: Message):
 async def corona_search(_, message: Message):
     cmd = message.command
 
-    if not (len(cmd) >= 2):
+    if len(cmd) < 2:
         await message.edit("```Not enough params provided```")
         await asyncio.sleep(3)
         await message.delete()
@@ -81,7 +81,7 @@ async def corona_search(_, message: Message):
         cc.add_row(["Tests", f"{r['tests']:,}"])
         cc.add_row(["Tests/Million", f"{r['testsPerOneMillion']:,}"])
         cc.align = "l"
-        await message.edit(f"```{str(cc)}```\nLast updated on: {last_updated}")
+        await message.edit(f'```{cc}```\nLast updated on: {last_updated}')
 
 
 add_command_help(

@@ -16,7 +16,7 @@ gif_categories = ['wink', 'pat', 'hug', 'face-palm']
 async def animu_gifs(_, message: Message):
     cmd = message.command
 
-    if not (len(cmd) >= 2):
+    if len(cmd) < 2:
         await message.edit("```Not enough params provided```")
         await asyncio.sleep(3)
         await message.delete()
@@ -64,15 +64,11 @@ async def animu_fact(_, message: Message):
         await message.edit(quote)
 
 # Animu gif help
-animu_gif_help = []
-for x in gif_categories:
-    animu_gif_help.append([f".animu-gif {x}", f"Sends a random anime gif of a {x}"])
+animu_gif_help = [
+    [f".animu-gif {x}", f"Sends a random anime gif of a {x}"]
+    for x in gif_categories
+]
 
 add_command_help("animu", animu_gif_help)
 
-add_command_help(
-    "animu",
-    [
-        [".animu-quote", f"Send a random anime quote"]
-    ],
-)
+add_command_help("animu", [[".animu-quote", 'Send a random anime quote']])

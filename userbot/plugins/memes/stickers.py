@@ -33,10 +33,10 @@ sticker_data = {
 }
 
 sticker_commands = []
-for x in sticker_data:
+for x, value in sticker_data.items():
     sticker_commands.append(x)
     if "alts" in sticker_data[x]:
-        for y in sticker_data[x]["alts"]:
+        for y in value["alts"]:
             sticker_commands.append(y)
 
 

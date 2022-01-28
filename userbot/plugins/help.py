@@ -20,8 +20,10 @@ async def module_help(_, message: Message):
     elif message.reply_to_message and len(cmd) == 1:
         help_arg = message.reply_to_message.text
     elif not message.reply_to_message and len(cmd) == 1:
-        all_commands = ""
-        all_commands += "Please specify which module you want help for!! \nUsage: `.help [module_name]`\n\n"
+        all_commands = (
+            ""
+            + "Please specify which module you want help for!! \nUsage: `.help [module_name]`\n\n"
+        )
 
         ac = PrettyTable()
         ac.header = False
@@ -31,7 +33,7 @@ async def module_help(_, message: Message):
         for x in split_list(sorted(CMD_HELP.keys()), 2):
             ac.add_row([x[0], x[1] if len(x) >= 2 else None])
 
-        await message.edit(f"```{str(ac)}```")
+        await message.edit(f'```{ac}```')
 
     if help_arg:
         if help_arg in CMD_HELP:
@@ -39,8 +41,8 @@ async def module_help(_, message: Message):
             this_command = "**Help for**\n"
             this_command += heading.format(str(help_arg)).upper()
 
-            for x in commands:
-                this_command += f"-> `{str(x)}`\n```{str(commands[x])}```\n"
+            for x, value in commands.items():
+                this_command += f'-> `{x}`\n```{value}```\n'
 
             await message.edit(this_command, parse_mode="markdown")
         else:
@@ -62,11 +64,7 @@ def add_command_help(module_name, commands):
     # Key will be group name
     # values will be dict of dicts of key command and value description
 
-    if module_name in CMD_HELP.keys():
-        command_dict = CMD_HELP[module_name]
-    else:
-        command_dict = {}
-
+    command_dict = CMD_HELP[module_name] if module_name in CMD_HELP.keys() else {}
     for x in commands:
         for y in x:
             if y is not x:

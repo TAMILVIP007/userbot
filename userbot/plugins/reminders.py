@@ -13,16 +13,16 @@ async def show_all_reminders(_, message: Message):
     if len(reminders) != 0:
         send_text = "**==== My Reminders ====** \n"
         for reminder in reminders:
-            send_text = send_text + f"{reminder[0]} | **{reminder[1]}**\n"
+            send_text += f"{reminder[0]} | **{reminder[1]}**\n"
 
         await message.edit(send_text, disable_web_page_preview=True)
         sleep(20)
-        await message.delete()
     else:
         send_text = "__You do not have any reminders__"
         await message.edit(send_text, disable_web_page_preview=True)
         sleep(5)
-        await message.delete()
+
+    await message.delete()
 
 
 @UserBot.on_message(filters.command("remind", ".") & filters.me)
@@ -64,12 +64,11 @@ async def delete_reminder(_, message: Message):
     if Reminders().find_reminder(reminder_id) is not None:
         Reminders().delete_reminder(reminder_id)
         await message.edit("```Reminder deleted```")
-        sleep(2)
-        await message.delete()
     else:
         await message.edit(f"```Reminder {reminder_id} not found```")
-        sleep(2)
-        await message.delete()
+
+    sleep(2)
+    await message.delete()
 
 
 add_command_help(
